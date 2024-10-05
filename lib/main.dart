@@ -12,15 +12,7 @@ class Note_app extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Note App',
-      theme: ThemeMode.system == ThemeMode.light
-          ? ThemeData.light().copyWith(
-              primaryColor: Colors.black12,
-              hintColor: const Color.fromARGB(255, 78, 143, 255),
-            )
-          : ThemeData.dark().copyWith(
-              primaryColor: Colors.white,
-              hintColor: Colors.red,
-            ),
+      theme: ThemeData.dark(),
       routerConfig: Routes.router,
     );
   }
