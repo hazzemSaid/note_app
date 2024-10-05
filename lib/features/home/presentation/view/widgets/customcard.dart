@@ -27,6 +27,7 @@ class CustomCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
               contentPadding: const EdgeInsets.all(0),
@@ -59,6 +60,12 @@ class CustomCard extends StatelessWidget {
               width: double.infinity,
               height: 20,
             ),
+            Text('25th may 2021',
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.6),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
