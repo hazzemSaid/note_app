@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/features/home/presentation/view/widgets/add_node.dart';
 import 'package:note_app/features/home/presentation/view/widgets/homeScreen_body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,7 +9,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return const AddNode();
+                });
+          },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
