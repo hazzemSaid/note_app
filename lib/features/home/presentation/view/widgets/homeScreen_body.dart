@@ -19,7 +19,7 @@ class HomeScreen_body extends StatelessWidget {
               child: CustomCard(index: index),
             );
           }),
-        )
+        ),
       ],
     );
   }
