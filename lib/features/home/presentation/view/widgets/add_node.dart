@@ -6,23 +6,51 @@ class AddNode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
+            width: double.infinity,
+            height: 29,
+          ),
+          const CustomTextfield(
+            hint: 'title',
+            maxline: 1,
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 30,
+          ),
+          const CustomTextfield(
+            maxline: 5,
+            hint: 'description',
+          ),
+          const SizedBox(
             width: double.infinity,
             height: 20,
           ),
-          CustomTextfield(
-            hint: 'title',
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 60,
-          ),
-          CustomTextfield(
-            hint: 'description',
+          Padding(
+            padding: const EdgeInsets.only(top: 45.0),
+            child: GestureDetector(
+                child: Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.cyan,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Center(
+                child: Text(
+                  'Add',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            )),
           ),
         ],
       ),
