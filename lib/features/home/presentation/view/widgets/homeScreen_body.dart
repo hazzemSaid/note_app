@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/features/home/presentation/view/widgets/customcard.dart';
 
+import '../screens/editnoteview.dart';
+
 class HomeScreen_body extends StatelessWidget {
   const HomeScreen_body({super.key});
 
@@ -16,7 +18,14 @@ class HomeScreen_body extends StatelessWidget {
           child: ListView.builder(itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: CustomCard(index: index),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Editnoteview()));
+                  },
+                  child: CustomCard(index: index)),
             );
           }),
         ),
