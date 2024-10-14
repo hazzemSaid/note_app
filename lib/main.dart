@@ -11,6 +11,7 @@ class Note_app extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Note App',
       theme: ThemeData.dark(),
       routerConfig: Routes.router,
