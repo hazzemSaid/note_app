@@ -7,49 +7,27 @@ class Editnoteviewbody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           height: 50,
         ),
-        const CustomTextfield(
+        CustomTextfield(
           hint: 'title',
           maxline: 1,
         ),
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           height: 30,
         ),
-        const CustomTextfield(
+        CustomTextfield(
           maxline: 5,
           hint: 'description',
         ),
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 45.0),
-          child: GestureDetector(
-              child: Container(
-            width: double.infinity,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.cyan,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Center(
-              child: Text(
-                'Add',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          )),
         ),
       ],
     );
