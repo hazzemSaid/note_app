@@ -10,26 +10,29 @@ class AddNode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: BlocConsumer<AddnoteCubit, AddnoteState>(
-        listener: (context, state) {
-          if (state is AddnoteSuccess) {
-            Navigator.pop(context);
-          }
-          if (state is AddnoteError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          return ModalProgressHUD(
-              inAsyncCall: state is AddnoteLoading ? true : false,
-              child: const addNoteForm());
-        },
+    return BlocProvider<AddnoteCubit>(
+      create: (context) => AddnoteCubit(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        child: BlocConsumer<AddnoteCubit, AddnoteState>(
+          listener: (context, state) {
+            if (state is AddnoteSuccess) {
+              Navigator.pop(context);
+            }
+            if (state is AddnoteError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+                inAsyncCall: state is AddnoteLoading ? true : false,
+                child: const addNoteForm());
+          },
+        ),
       ),
     );
   }

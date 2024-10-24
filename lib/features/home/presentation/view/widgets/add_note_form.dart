@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/cubit/addnote/addnote_cubit.dart';
 import 'package:note_app/features/home/presentation/view/widgets/CustomTextfield.dart';
+import 'package:note_app/model/note_model.dart';
 
 class addNoteForm extends StatefulWidget {
   const addNoteForm({
@@ -55,10 +58,25 @@ class _addNoteFormState extends State<addNoteForm> {
                   onTap: () {
                     if (formkey.currentState!.validate()) {
                       formkey.currentState!.save();
-                      print(title);
-                      print(description);
-                      //add in hive
-                      Navigator.pop(context);
+                      var note = NoteModel(
+                        title: title!,
+                        description: description!,
+                        date: DateTime.now().toString(),
+                        color: Colors.cyan.value,
+                      );
+                      BlocProvider.of<AddnoteCubit>(context).addnote(note);
+
+                      formkey.currentState!.reset();
+                      setState(() {
+                        autovalidateMode = AutovalidateMode.disabled;
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Note Added'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
                     } else {
                       setState(() {
                         autovalidateMode = AutovalidateMode.always;
