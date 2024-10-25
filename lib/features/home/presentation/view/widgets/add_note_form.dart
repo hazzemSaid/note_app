@@ -23,72 +23,67 @@ class _addNoteFormState extends State<addNoteForm> {
     return Form(
       key: formkey,
       autovalidateMode: autovalidateMode,
-      child: Column(
-        children: [
-          const SizedBox(
-            width: double.infinity,
-            height: 29,
-          ),
-          CustomTextfield(
-            onsave: (value) {
-              title = value;
-            },
-            hint: 'title',
-            maxline: 1,
-          ),
-          const SizedBox(
-            width: double.infinity,
-            height: 30,
-          ),
-          CustomTextfield(
-            onsave: (value) {
-              description = value;
-            },
-            maxline: 5,
-            hint: 'description',
-          ),
-          const SizedBox(
-            width: double.infinity,
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 45.0),
-            child: GestureDetector(onTap: () {
-              if (formkey.currentState!.validate()) {
-                formkey.currentState!.save();
-                var note = NoteModel(
-                  title: title!,
-                  description: description!,
-                  date: DateTime.now().toString(),
-                  color: Colors.cyan.value,
-                );
-                BlocProvider.of<AddnoteCubit>(context).addnote(note);
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: 5.0,
+            right: 5.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          height: 400,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomTextfield(
+                onsave: (value) {
+                  title = value;
+                },
+                hint: 'title',
+                maxline: 1,
+              ),
+              CustomTextfield(
+                onsave: (value) {
+                  description = value;
+                },
+                maxline: 6,
+                hint: 'description',
+              ),
+              GestureDetector(onTap: () {
+                if (formkey.currentState!.validate()) {
+                  formkey.currentState!.save();
+                  var note = NoteModel(
+                    title: title!,
+                    description: description!,
+                    date: DateTime.now().toString(),
+                    color: Colors.cyan.value,
+                  );
+                  BlocProvider.of<AddnoteCubit>(context).addnote(note);
 
-                formkey.currentState!.reset();
-                setState(() {
-                  autovalidateMode = AutovalidateMode.disabled;
-                });
+                  formkey.currentState!.reset();
+                  setState(() {
+                    autovalidateMode = AutovalidateMode.disabled;
+                  });
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Note Added'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              } else {
-                setState(() {
-                  autovalidateMode = AutovalidateMode.always;
-                });
-              }
-            }, child: BlocBuilder<AddnoteCubit, AddnoteState>(
-              builder: (context, state) {
-                return Custom_Bottom(
-                  isloading: state is AddnoteLoading ? true : false,
-                );
-              },
-            )),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Note Added'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                } else {
+                  setState(() {
+                    autovalidateMode = AutovalidateMode.always;
+                  });
+                }
+              }, child: BlocBuilder<AddnoteCubit, AddnoteState>(
+                builder: (context, state) {
+                  return Custom_Bottom(
+                    isloading: state is AddnoteLoading ? true : false,
+                  );
+                },
+              )),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

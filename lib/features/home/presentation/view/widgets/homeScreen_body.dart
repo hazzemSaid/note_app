@@ -15,19 +15,21 @@ class HomeScreen_body extends StatelessWidget {
           height: 20,
         ),
         Flexible(
-          child: ListView.builder(itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Editnoteview()));
-                  },
-                  child: CustomCard(index: index)),
-            );
-          }),
+          child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Editnoteview()));
+                      },
+                      child: CustomCard(index: index)),
+                );
+              }),
         ),
       ],
     );
