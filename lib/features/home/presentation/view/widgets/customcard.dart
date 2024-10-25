@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/model/note_model.dart';
 
 class CustomCard extends StatelessWidget {
   final int index;
-  CustomCard({
-    super.key,
-    required this.index,
-  });
+  final NoteModel note;
+  CustomCard({super.key, required this.index, required this.note});
   final List<Color> colors = [
     Colors.red,
     Colors.blue,
@@ -32,7 +31,7 @@ class CustomCard extends StatelessWidget {
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               title: Text(
-                'Flutter Tips',
+                note.title,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
                   fontSize: 20,
@@ -40,7 +39,7 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                'Build a Flutter app that uses the following features:',
+                note.description,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.6),
                   fontSize: 20,
@@ -60,7 +59,7 @@ class CustomCard extends StatelessWidget {
               width: double.infinity,
               height: 20,
             ),
-            Text('25th may 2021',
+            Text(note.date,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.6),
                   fontSize: 20,
