@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/cubit/getnotecubit/getnotes_cubit.dart';
 import 'package:note_app/model/note_model.dart';
 
 class CustomCard extends StatelessWidget {
@@ -54,6 +56,7 @@ class CustomCard extends StatelessWidget {
                 ),
                 onPressed: () {
                   note.delete();
+                  BlocProvider.of<GetnotesCubit>(context).feachnote();
                 },
               ),
             ),
