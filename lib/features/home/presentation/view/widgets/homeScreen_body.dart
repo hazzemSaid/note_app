@@ -30,8 +30,8 @@ class HomeScreen_body extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Editnoteview()));
+                                      builder: (context) => Editnoteview(
+                                          note: state.notes[index])));
                             },
                             child: CustomCard(
                               index: index,
