@@ -19,6 +19,7 @@ class _addNoteFormState extends State<addNoteForm> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, description;
+  int? color;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -30,7 +31,7 @@ class _addNoteFormState extends State<addNoteForm> {
             right: 5.0,
             bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
-          height: 400,
+          height: 450,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -48,6 +49,13 @@ class _addNoteFormState extends State<addNoteForm> {
                 maxline: 6,
                 hint: 'description',
               ),
+              const SizedBox(
+                height: 2,
+              ),
+              const Listviewcolor(),
+              const SizedBox(
+                height: 5,
+              ),
               GestureDetector(onTap: () {
                 if (formkey.currentState!.validate()) {
                   formkey.currentState!.save();
@@ -57,7 +65,7 @@ class _addNoteFormState extends State<addNoteForm> {
                     title: title!,
                     description: description!,
                     date: format,
-                    color: Colors.cyan.value,
+                    color: color ?? Colors.cyan.value,
                   );
                   BlocProvider.of<AddnoteCubit>(context).addnote(note);
                   formkey.currentState!.reset();
@@ -119,6 +127,37 @@ class Custom_Bottom extends StatelessWidget {
                 ),
               ),
       ),
+    );
+  }
+}
+
+class Listviewcolor extends StatelessWidget {
+  const Listviewcolor({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 38 * 2,
+      child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, intdex) {
+            return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 6),
+                child: Coloritem());
+          }),
+    );
+  }
+}
+
+class Coloritem extends StatelessWidget {
+  const Coloritem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const CircleAvatar(
+      radius: 38,
+      backgroundColor: Colors.cyan,
     );
   }
 }

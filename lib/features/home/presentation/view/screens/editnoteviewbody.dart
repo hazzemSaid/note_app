@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/cubit/getnotecubit/getnotes_cubit.dart';
 import 'package:note_app/model/note_model.dart';
-
 import '../widgets/CustomTextfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Editnoteviewbody extends StatefulWidget {
   final NoteModel note;
@@ -47,7 +48,7 @@ class _EditnoteviewbodyState extends State<Editnoteviewbody> {
                       widget.note.description =
                           content ?? widget.note.description;
                       widget.note.save();
-                      BlocProvider.of<get>
+                      BlocProvider.of<GetnotesCubit>(context).feachnote();
                       Navigator.pop(context);
                     },
                     icon: const Icon(
