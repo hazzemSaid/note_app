@@ -19,7 +19,7 @@ class _addNoteFormState extends State<addNoteForm> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, description;
-  int? color;
+  int? indxcolor;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -52,7 +52,13 @@ class _addNoteFormState extends State<addNoteForm> {
               const SizedBox(
                 height: 2,
               ),
-              const Listviewcolor(),
+              Listviewcolor(
+                fn: (indx) {
+                  setState(() {
+                    indxcolor = indx;
+                  });
+                },
+              ),
               const SizedBox(
                 height: 5,
               ),
@@ -61,11 +67,12 @@ class _addNoteFormState extends State<addNoteForm> {
                   formkey.currentState!.save();
                   var datenow = DateTime.now();
                   var format = DateFormat.yMEd().format(datenow);
+                  print(indxcolor);
                   var note = NoteModel(
                     title: title!,
                     description: description!,
                     date: format,
-                    color: color ?? Colors.cyan.value,
+                    color: indxcolor ?? Colors.cyan.value,
                   );
                   BlocProvider.of<AddnoteCubit>(context).addnote(note);
                   formkey.currentState!.reset();
@@ -131,33 +138,73 @@ class Custom_Bottom extends StatelessWidget {
   }
 }
 
-class Listviewcolor extends StatelessWidget {
-  const Listviewcolor({super.key});
+class Listviewcolor extends StatefulWidget {
+  const Listviewcolor({super.key, required this.fn});
+  final Function fn;
+  @override
+  State<Listviewcolor> createState() => _ListviewcolorState();
+}
 
+class _ListviewcolorState extends State<Listviewcolor> {
+  int selected = 0;
+  final List<Color> colors = [
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.purple,
+    Colors.orange,
+    Colors.pink,
+    Colors.teal,
+    Colors.brown,
+    Colors.grey,
+  ];
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 38 * 2,
       child: ListView.builder(
-          itemCount: 10,
+          itemCount: colors.length,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, intdex) {
-            return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 6),
-                child: Coloritem());
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                selected = index;
+                setState(() {
+                  widget.fn(index);
+                });
+              },
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 1.0, horizontal: 4.2),
+                  child: Coloritem(
+                    color: colors[index],
+                    isselelcted: selected == index,
+                  )),
+            );
           }),
     );
   }
 }
 
 class Coloritem extends StatelessWidget {
-  const Coloritem({super.key});
-
+  final bool isselelcted;
+  final Color color;
+  const Coloritem({super.key, required this.isselelcted, required this.color});
   @override
   Widget build(BuildContext context) {
-    return const CircleAvatar(
-      radius: 38,
-      backgroundColor: Colors.cyan,
-    );
+    return isselelcted
+        ? CircleAvatar(
+            radius: 38,
+            backgroundColor: Colors.white,
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: color,
+            ),
+          )
+        : CircleAvatar(
+            radius: 38,
+            backgroundColor: color,
+          );
   }
 }
